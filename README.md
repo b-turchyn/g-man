@@ -35,7 +35,6 @@ TODO
 * Mount the other games into Garry's Mod.
 * Automatically install Prop Hunt.
 * Accept parameters for things such as passwords, game modes, map, etc.
-* x64 support.
 
 Warranty
 ========

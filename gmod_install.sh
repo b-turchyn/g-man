@@ -4,7 +4,17 @@ SESS_NAME=gmod
 WINDOW_NAME=0
 PANE_NAME=0
 
+ARCH=`uname -p`
+
 apt-get update
+
+if [ "$ARCH" = "x86_64" ];
+then
+  dpkg --add-architecture i386
+  apt-get update
+  apt-get -y install ia32-libs
+fi
+
 apt-get -y install vim libevent-dev libncurses5-dev build-essential
 wget http://downloads.sourceforge.net/tmux/tmux-1.8.tar.gz
 tar xfz tmux-1.8.tar.gz
