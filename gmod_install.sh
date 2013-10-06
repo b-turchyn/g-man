@@ -4,10 +4,11 @@ SESS_NAME=gmod
 WINDOW_NAME=0
 PANE_NAME=1
 
-apt-get -y install vim libevent-dev libncurses-dev
+apt-get update
+apt-get -y install vim libevent-dev libncurses5-dev build-essential
 wget http://downloads.sourceforge.net/tmux/tmux-1.8.tar.gz
 tar xfz tmux-1.8.tar.gz
-cd tmux_1.8
+cd tmux-1.8
 ./configure
 make install clean
 chmod +x steamcmd.sh
