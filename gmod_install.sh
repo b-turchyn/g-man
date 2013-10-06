@@ -4,7 +4,7 @@ apt-get -y install tmux vim
 tar xfz steamcmd_linux.tar.gz
 chmod +x steamcmd.sh
 mkdir -p /home/srcds
-adduser srcds
+useradd srcds
 wget http://media.steampowered.com/client/steamcmd_linux.tar.gz -O /home/srcds/steamcmd_linux.tar.gz
 tar xfz /home/srcds/steamcmd_linux.tar.gz /home/srcds
 chown -R srcds:srcds /home/srcds
