@@ -2,7 +2,7 @@
 
 SESS_NAME=gmod
 WINDOW_NAME=0
-PANE_NAME=1
+PANE_NAME=0
 
 apt-get update
 apt-get -y install vim libevent-dev libncurses5-dev build-essential
@@ -25,4 +25,5 @@ su - -c "/home/srcds/steamcmd.sh +login anonymous +force_install_dir /home/srcds
 # Spin up the tmux session
 tmux new-session -A -d -s gmod
 
-tmux send-keys -t "$SESS_NAME:0.1" C-z 'su - srcds; gmod/srcds_run -game garrysmod +maxplayers 12 +map gm_flatgrass'
+tmux send-keys -t "$SESS_NAME:$WINDOW_NAME.$PANE_NAME" C-z \
+  "su - -c '/home/srcds/gmod/srcds_run -game garrysmod +maxplayers 12 +map gm_flatgrass +sv_password gmod +rcon_password gmod' srcds" Enter
