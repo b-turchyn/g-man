@@ -13,7 +13,7 @@ GAMEMODE=sandbox
 EXTRA_OPTIONS=''
 
 # Grab vars from command line
-while getopts ":M:S:u:s:r:m:o:h:g:" opt; do
+while getopts ":M:S:u:s:r:m:o:hg:" opt; do
   case $opt in
     S)
       SESS_NAME="$OPTARG"
