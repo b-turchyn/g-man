@@ -72,10 +72,11 @@ done
 HOMEDIR="/home/$USER"
 ARCH=`uname -p`
 
-echo "Architecture: $ARCH"
+echo "System Architecture: $ARCH"
 echo "Username: $USER"
 echo "SV Password: $SV_PASSWORD"
 echo "RCON Password: $RCON_PASSWORD"
+echo "Game Mode: $GAMEMODE"
 echo "Starting Map: $MAP"
 echo "Player Max: $MAX_PLAYERS"
 echo "Tmux Session Name: $SESS_NAME"

@@ -16,7 +16,25 @@ new iterations of this script.
 Usage
 =====
 
+Standard Install:
+
 `ssh <user>@<host> -c "wget https://github.com/b-turchyn/gmod/raw/master/gmod_install.sh -O - | bash"`
+
+Customized Install:
+
+`ssh <user>@<host> -c "wget https://github.com/b-turchyn/gmod/raw/master/gmod_install.sh -O - | \
+  bash /dev/stdin [options]"`
+
+    Option    Description                               Default
+    --------------------------------------------------------------------
+        -u    User to install the server under          srcds
+        -s    Set the sv_password option
+        -r    Sets the RCON password                    PaSsWoRd!
+        -m    Maximum number of players on the server   12
+        -g    Game mode                                 sandbox
+        -M    Starting map                              gm_flatgrass
+        -S    Session name for tmux                     gmod
+        -o    Set extra options
 
 What This Script Does
 =====================
@@ -33,8 +51,7 @@ TODO
 ====
 
 * Mount the other games into Garry's Mod.
-* Automatically install Prop Hunt.
-* Accept parameters for things such as passwords, game modes, map, etc.
+* Automatically install Prop Hunt (because Prop Hunt is awesome).
 
 Warranty
 ========
