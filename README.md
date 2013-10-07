@@ -22,8 +22,8 @@ Standard Install:
 
 Customized Install:
 
-`ssh <user>@<host> -c "wget https://github.com/b-turchyn/gmod/raw/master/gmod_install.sh -O - | \
-  bash /dev/stdin [options]"`
+    ssh <user>@<host> -c "wget https://github.com/b-turchyn/gmod/raw/master/gmod_install.sh -O - | \
+      bash /dev/stdin [options]"`
 
     Option    Description                               Default
     --------------------------------------------------------------------
