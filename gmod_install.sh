@@ -72,6 +72,8 @@ done
 HOMEDIR="/home/$USER"
 ARCH=`uname -p`
 
+# Opening Banner
+
 echo "System Architecture: $ARCH"
 echo "Username: $USER"
 echo "SV Password: $SV_PASSWORD"
@@ -141,7 +143,7 @@ fi
 
 
 # Spin up the tmux session
-tmux new-session -A -d -s gmod
+tmux new-session -A -d -s $SESS_NAME
 
 tmux send-keys -t "$SESS_NAME:$WINDOW_NAME.$PANE_NAME" C-z \
   "su - -c '$HOMEDIR/gmod/srcds_run $OPTSTRING' $USER" Enter
