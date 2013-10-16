@@ -25,8 +25,7 @@ Customized Install:
     ssh <user>@<host> "wget https://github.com/b-turchyn/g-man/raw/master/gmod_install.sh -O - | \
       bash /dev/stdin [options]"
 
-
-
+Parameters:
 
     Option    Description                               Default
     --------------------------------------------------------------------
