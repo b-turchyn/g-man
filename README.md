@@ -2,8 +2,8 @@ G-Man
 ====
 
 G-Man is a no-frills, one-command installer for a Garry's Mod dedicated server.
-It is designed for Ubuntu 12.04 x86 (with x64 support coming soon). Other OSs
-will almost certainly fail.
+It is designed for Ubuntu 12.04 x86 and x64 support. Other OSs will almost
+certainly fail, although you may get lucky with Debian.
 
 This script was written because I didn't want to pay for a GMod server 24/7.
 I've been using the VPSs over at [Digital Ocean](http://www.digitalocean.com)
@@ -23,7 +23,10 @@ Standard Install:
 Customized Install:
 
     ssh <user>@<host> "wget https://github.com/b-turchyn/g-man/raw/master/gmod_install.sh -O - | \
-      bash /dev/stdin [options]"`
+      bash /dev/stdin [options]"
+
+
+
 
     Option    Description                               Default
     --------------------------------------------------------------------
@@ -45,12 +48,12 @@ What This Script Does
 * Downloads all required files for Garry's Mod, Counter-Strike: Source, and
   Team Fortress 2. These games provide a bunch of good content that is required
   for most mods in Garry's Mod.
+* Mounts the other games into Garry's Mod.
 * Starts up the server in its own Tmux session (in session `gmod:0.0`)
 
 TODO
 ====
 
-* Mount the other games into Garry's Mod.
 * Automatically install Prop Hunt (because Prop Hunt is awesome).
 
 Warranty
