@@ -72,18 +72,40 @@ done
 HOMEDIR="/home/$USER"
 ARCH=`uname -p`
 
-# Opening Banner
+clear
 
-echo "System Architecture: $ARCH"
-echo "Username: $USER"
-echo "SV Password: $SV_PASSWORD"
-echo "RCON Password: $RCON_PASSWORD"
-echo "Game Mode: $GAMEMODE"
-echo "Starting Map: $MAP"
-echo "Player Max: $MAX_PLAYERS"
-echo "Tmux Session Name: $SESS_NAME"
-echo "Extra Options: $EXTRA_OPTIONS"
-echo ""
+# Opening Banner
+cat <<DELIM
+     _____        __  __
+    / ____|      |  \/  |
+   | |  __ ______| \  / | __ _ _ __
+   | | |_ |______| |\/| |/ _\` | '_ \\
+   | |__| |      | |  | | (_| | | | |
+    \_____|      |_|  |_|\__,_|_| |_|
+
+      Garry's Mod Auto-Installer
+
+
+================================================================================
+  Options
+================================================================================
+
+   System Architecture: $ARCH
+   Username: $USER
+   SV Password: $SV_PASSWORD
+   RCON Password: $RCON_PASSWORD
+   Game Mode: $GAMEMODE
+   Starting Map: $MAP
+   Player Max: $MAX_PLAYERS
+   Tmux Session Name: $SESS_NAME
+   Extra Options: $EXTRA_OPTIONS
+================================================================================
+
+
+  You have 5 seconds to hit Ctrl-C if the above options don't look right!
+DELIM
+
+sleep 5
 
 apt-get update
 
@@ -147,3 +169,15 @@ tmux new-session -A -d -s $SESS_NAME
 
 tmux send-keys -t "$SESS_NAME:$WINDOW_NAME.$PANE_NAME" C-z \
   "su - -c '$HOMEDIR/gmod/srcds_run $OPTSTRING' $USER" Enter
+
+cat <<DELIM                                                                                                                              master 
+     _____        __  __
+    / ____|      |  \/  |
+   | |  __ ______| \  / | __ _ _ __
+   | | |_ |______| |\/| |/ _\` | '_ \\
+   | |__| |      | |  | | (_| | | | |
+    \_____|      |_|  |_|\__,_|_| |_|
+
+Complete!
+https://github.com/b-turchyn/g-man
+DELIM
