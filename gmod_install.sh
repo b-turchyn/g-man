@@ -144,4 +144,4 @@ fi
 tmux new-session -A -d -s gmod
 
 tmux send-keys -t "$SESS_NAME:$WINDOW_NAME.$PANE_NAME" C-z \
-  "su - -c '$HOMEDIR/gmod/srcds_run -game garrysmod +maxplayers $MAX_PLAYERS +map gm_flatgrass +sv_password gmod +rcon_password gmod' $USER" Enter
+  "su - -c '$HOMEDIR/gmod/srcds_run $OPTSTRING' $USER" Enter
