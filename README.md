@@ -1,7 +1,7 @@
-GMod
+G-Man
 ====
 
-GMod is a no-frills, one-command installer for a Garry's Mod dedicated server.
+G-Man is a no-frills, one-command installer for a Garry's Mod dedicated server.
 It is designed for Ubuntu 12.04 x86 (with x64 support coming soon). Other OSs
 will almost certainly fail.
 
@@ -11,18 +11,18 @@ because you pay by the hour and they run on SSDs. They are, by far, the best
 VPSs I've ever seen for that price and are perfect for this use.
 
 Digital Ocean has an API; I might see if I can leverage that in the future for
-new iterations of this script. 
+new iterations of this script.
 
 Usage
 =====
 
 Standard Install:
 
-`ssh <user>@<host> -c "wget https://github.com/b-turchyn/gmod/raw/master/gmod_install.sh -O - | bash"`
+`ssh <user>@<host> "wget https://github.com/b-turchyn/g-man/raw/master/gmod_install.sh -O - | bash"`
 
 Customized Install:
 
-    ssh <user>@<host> -c "wget https://github.com/b-turchyn/gmod/raw/master/gmod_install.sh -O - | \
+    ssh <user>@<host> "wget https://github.com/b-turchyn/g-man/raw/master/gmod_install.sh -O - | \
       bash /dev/stdin [options]"`
 
     Option    Description                               Default
