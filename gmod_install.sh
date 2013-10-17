@@ -170,7 +170,7 @@ tmux new-session -A -d -s $SESS_NAME
 tmux send-keys -t "$SESS_NAME:$WINDOW_NAME.$PANE_NAME" C-z \
   "su - -c '$HOMEDIR/gmod/srcds_run $OPTSTRING' $USER" Enter
 
-cat <<DELIM                                                                                                                              master 
+cat <<DELIM
      _____        __  __
     / ____|      |  \/  |
    | |  __ ______| \  / | __ _ _ __
