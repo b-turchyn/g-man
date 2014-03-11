@@ -16,6 +16,15 @@ new iterations of this script.
 Usage
 =====
 
+Local Installation
+------------------
+
+* Either clone this repository, or download `gmod_install.sh`
+* As `root`, `./gmod_install.sh [options]`
+
+Remote Installation
+-------------------
+
 Standard Install:
 
 `ssh <user>@<host> "wget https://github.com/b-turchyn/g-man/raw/master/gmod_install.sh -O - | bash"`
@@ -27,15 +36,17 @@ Customized Install:
 
 Parameters:
 
-    Option    Description                               Default
-    --------------------------------------------------------------------
-        -u    User to install the server under          srcds
+    Option    Description                                  Default
+    -----------------------------------------------------------------------
+        -u    User to install the server under             srcds
         -s    Set the sv_password option
-        -r    Sets the RCON password                    PaSsWoRd!
-        -m    Maximum number of players on the server   12
-        -g    Game mode                                 sandbox
-        -M    Starting map                              gm_flatgrass
-        -S    Session name for tmux                     gmod
+        -r    Sets the RCON password                       PaSsWoRd!
+        -m    Maximum number of players on the server      12
+        -g    Game mode                                    sandbox
+        -M    Starting map                                 gm_flatgrass
+        -S    Session name for tmux                        gmod
+        -c    Steam Workshop Collection ID (requires -a)
+        -a    API Key
         -o    Set extra options
 
 What This Script Does
@@ -48,13 +59,12 @@ What This Script Does
   Team Fortress 2. These games provide a bunch of good content that is required
   for most mods in Garry's Mod.
 * Mounts the other games into Garry's Mod.
-* Starts up the server in its own Tmux session (in session `gmod:0.0`)
+* Starts up the server in its own Tmux session (in session `gmod:0.0`, by default)
 
 TODO
 ====
 
-* Automatically install Prop Hunt (because Prop Hunt is awesome).
-
+* Support other App IDs and allow for them to be added into the mount.cfg file.
 Warranty
 ========
 
