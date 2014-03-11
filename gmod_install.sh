@@ -10,10 +10,12 @@ RCON_PASSWORD='PaSsWoRd!'
 MAX_PLAYERS=12
 MAP=gm_flatgrass
 GAMEMODE=sandbox
+API_KEY=
+COLLECTION=
 EXTRA_OPTIONS=''
 
 # Grab vars from command line
-while getopts ":M:S:u:s:r:m:o:hg:" opt; do
+while getopts ":M:S:u:s:r:m:o:h:g:c:a:" opt; do
   case $opt in
     S)
       SESS_NAME="$OPTARG"
@@ -39,20 +41,28 @@ while getopts ":M:S:u:s:r:m:o:hg:" opt; do
     g)
       GAMEMODE="$OPTARG"
       ;;
+    c)
+      COLLECTION="$OPTARG"
+      ;;
+    a)
+      API_KEY="$OPTARG"
+      ;;
     h)
       cat <<DELIM
 
     Usage: ./gmod_install.sh
 
-    Option    Description                               Default
-    --------------------------------------------------------------------
-        -u    User to install the server under          srcds
+    Option    Description                                  Default
+    -----------------------------------------------------------------------
+        -u    User to install the server under             srcds
         -s    Set the sv_password option
-        -r    Sets the RCON password                    PaSsWoRd!
-        -m    Maximum number of players on the server   12
-        -g    Game mode                                 sandbox
-        -M    Starting map                              gm_flatgrass
-        -S    Session name for tmux                     gmod
+        -r    Sets the RCON password                       PaSsWoRd!
+        -m    Maximum number of players on the server      12
+        -g    Game mode                                    sandbox
+        -M    Starting map                                 gm_flatgrass
+        -S    Session name for tmux                        gmod
+        -c    Steam Workshop Collection ID (requires -a)
+        -a    API Key
         -o    Set extra options
 
 DELIM
@@ -71,6 +81,13 @@ done
 
 HOMEDIR="/home/$USER"
 ARCH=`uname -p`
+
+# Validation: we need to have either both collection and API key, or neither.
+if ([ -z "$COLLECTION" ] && [ -n "$API_KEY" ] ) || ( [ -n "$COLLECTION" ] && [ -z "$API_KEY" ] ); then
+#if (  ) != (  ); then
+  echo "Collection and API key must be provided together."
+  exit -1;
+fi;
 
 clear
 
@@ -98,6 +115,8 @@ cat <<DELIM
    Starting Map: $MAP
    Player Max: $MAX_PLAYERS
    Tmux Session Name: $SESS_NAME
+   Steam Workshop Collection: $COLLECTION
+   API Key: $API_KEY
    Extra Options: $EXTRA_OPTIONS
 ================================================================================
 
@@ -107,6 +126,7 @@ DELIM
 
 sleep 5
 
+# Here we go! Update, and add the i386 architecture libraries in.
 apt-get update
 
 if [ "$ARCH" = "x86_64" ];
@@ -116,12 +136,15 @@ then
   apt-get -y install ia32-libs
 fi
 
+# Install tmux. Assume the version on the server is not new enough.
 apt-get -y install vim libevent-dev libncurses5-dev build-essential
 wget http://downloads.sourceforge.net/tmux/tmux-1.8.tar.gz
 tar xfz tmux-1.8.tar.gz
 cd tmux-1.8
 ./configure
 make install clean
+
+# Start with the Steam commands
 chmod +x steamcmd.sh
 mkdir -p "$HOMEDIR"
 useradd $USER
@@ -129,6 +152,8 @@ wget http://media.steampowered.com/client/steamcmd_linux.tar.gz -O $HOMEDIR/stea
 tar xfz $HOMEDIR/steamcmd_linux.tar.gz -C $HOMEDIR
 chown -R $USER:$USER $HOMEDIR
 chmod 700 $HOMEDIR
+
+# Execute Steam commands to build the server
 su - -c "$HOMEDIR/steamcmd.sh +login anonymous +force_install_dir $HOMEDIR/gmod +app_update 4020 validate +quit" $USER
 su - -c "$HOMEDIR/steamcmd.sh +login anonymous +force_install_dir $HOMEDIR/content/tf2 +app_update 232250 validate +quit" $USER
 su - -c "$HOMEDIR/steamcmd.sh +login anonymous +force_install_dir $HOMEDIR/content/css +app_update 232330 validate +quit" $USER
@@ -150,12 +175,17 @@ OPTSTRING=" -game garrysmod +maxplayers $MAX_PLAYERS +map $MAP +gamemode $GAMEMO
 
 if [ -n "$SV_PASSWORD" ];
 then
-  OPTSTRING="$OPTSTRING sv_password $SV_PASSWORD"
+  OPTSTRING="$OPTSTRING +sv_password $SV_PASSWORD"
 fi
 
 if [ -n "$RCON_PASSWORD" ];
 then
-  OPTSTRING="$OPTSTRING rcon_password $RCON_PASSWORD"
+  OPTSTRING="$OPTSTRING +rcon_password $RCON_PASSWORD"
+fi
+
+if [ -n "$COLLECTION" && -n "$API_KEY" ];
+then
+  OPTSTRING="$OPTSTRING +host_workshop_collection $COLLECTION -authkey $API_KEY"
 fi
 
 if [ -n "$EXTRA_OPTIONS" ];
